@@ -41,7 +41,7 @@ public class CourseDocument {
 
 @JsonFormat(
         shape = JsonFormat.Shape.STRING,
-        pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX",
+        pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS]X",
         timezone = "UTC"
 )
     private Instant nextSessionDate;

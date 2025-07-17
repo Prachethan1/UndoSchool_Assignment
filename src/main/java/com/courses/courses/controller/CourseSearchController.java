@@ -7,16 +7,14 @@ import com.courses.courses.service.CourseSearchService;
 import com.courses.courses.service.DataIndexingService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class CourseSearchController {
 
     private final CourseSearchService courseSearchService;
@@ -66,7 +64,7 @@ public class CourseSearchController {
         return ResponseEntity.ok(suggestions);
     }
 
-    @PostMapping("/admin/reindex")
+    @PostMapping("/reindex")
     public ResponseEntity<String> reindexData() {
         try {
             dataIndexingService.reindexData();

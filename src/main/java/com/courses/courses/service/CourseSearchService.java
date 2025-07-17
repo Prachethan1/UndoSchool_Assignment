@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Slf4j
@@ -64,6 +65,7 @@ public class CourseSearchService {
         return response;
     }
 
+
     public List<String> getSuggestions(String query) {
         if (query == null || query.trim().isEmpty()) {
             return List.of();
@@ -92,14 +94,16 @@ public class CourseSearchService {
                 co.elastic.clients.elasticsearch.core.SearchRequest.of(s -> s
                         .index("courses")
                         .query(autocompleteOrFuzzy)
+                        .source(src -> src.filter(f -> f.includes("title")))
                         .size(10)
                 );
 
         try {
-            var response = elasticsearchClient.search(searchRequest, CourseDocument.class);
+            var response = elasticsearchClient.search(searchRequest, Map.class);
 
             return response.hits().hits().stream()
-                    .map(hit -> hit.source().getTitle())
+                    .map(hit -> (Map<String, Object>) hit.source())
+                    .map(source -> (String) source.get("title"))
                     .filter(Objects::nonNull)
                     .toList();
 
@@ -107,6 +111,7 @@ public class CourseSearchService {
             throw new RuntimeException("Failed to fetch suggestions", e);
         }
     }
+
 
     private Query buildSearchQuery(SearchRequest request) {
         BoolQuery.Builder boolQueryBuilder = new BoolQuery.Builder();
