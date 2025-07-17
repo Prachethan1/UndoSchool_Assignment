@@ -1,0 +1,52 @@
+{
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "keyword"
+      },
+      "title": {
+        "type": "text",
+        "analyzer": "standard",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          },
+          "autocomplete": {
+            "type": "text",
+            "analyzer": "autocomplete_analyzer",
+            "search_analyzer": "autocomplete_search_analyzer"
+          }
+        }
+      },
+      "description": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "category": {
+        "type": "keyword"
+      },
+      "type": {
+        "type": "keyword"
+      },
+      "gradeRange": {
+        "type": "keyword"
+      },
+      "minAge": {
+        "type": "integer"
+      },
+      "maxAge": {
+        "type": "integer"
+      },
+      "price": {
+        "type": "double"
+      },
+      "nextSessionDate": {
+        "type": "date",
+        "format": "date_time"
+      },
+      "titleSuggest": {
+        "type" : "search_as_you_type"
+      }
+    }
+  }
+}
