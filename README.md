@@ -34,9 +34,15 @@ A Spring Boot application that indexes and searches "courses" in Elasticsearch w
 
 * Jackson for JSON
 
+* JUnit 5
+
+* Spring Boot Test
+
+* Testcontainers
+
 ### Project Structure 
 
-src/main/java/com/example/courses
+src/main/java/com/courses/courses
 
 ├── config/                
 ├── controller/             
@@ -49,6 +55,12 @@ src/main/resources/
 
 ├── sample-courses.json     
 └── application.properties
+
+src/test/java/com/courses/courses
+
+├── CoursesApplicationTests     
+└── CoursesSearchServiceTests
+
 
 docker-compose.yml          
 README.md                   
@@ -481,3 +493,25 @@ Response:
 ```bash
 Data reindexed successfully
 ```
+
+**Tests Overview**
+
+Test Names:
+
+testFullTextSearch	
+
+testPriceRangeFilter
+
+testSortingByPriceAsc	
+
+testAgeRangeFilter
+
+testCategoryFilter	
+
+testTypeFilter	
+
+testDefaultFutureDateFilter	
+
+testStartDateFilter	
+
+testGetSuggestions	
